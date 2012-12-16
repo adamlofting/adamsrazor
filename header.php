@@ -2,21 +2,7 @@
 <html <?php language_attributes(); ?>>
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
-<title>
-	<?php
-	global $page, $paged;	
-	
-	wp_title( '|', true, 'right' ); // only outputs if this page has a title
-	bloginfo( 'name' );
-
-	$site_description = get_bloginfo( 'description', 'display' );
-	if ( $site_description && ( is_home() || is_front_page() ) )
-		echo " | $site_description";
-	
-	if ( $paged >= 2 || $page >= 2 )
-		echo ' | ' . sprintf( __( 'Page %s', 'adams-razor' ), max( $paged, $page ) );
-	?>	
-</title>
+<title><?php wp_title( '|', true, 'right' ); ?></title>
 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="stylesheet" type="text/css" media="all" href="<?php echo get_stylesheet_uri(); ?>" />

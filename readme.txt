@@ -3,6 +3,9 @@
 * by adamlofting, http://adamlofting.com
 * feedback on the theme is welcome here: http://adamlofting.com/adams-razor/
 
+== BREAKING CHANGES ==
+* V1.1 This theme no longer supports directly adding custom script tags or code to the header and footer via the theme options. This functionality should instead be managed through an appropriate plugin.
+
 == ABOUT ADAM'S RAZOR ==
 
 Features:

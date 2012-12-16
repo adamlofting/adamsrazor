@@ -10,10 +10,10 @@ function adamsrazor_setup() {
 		
 	add_theme_support( 'automatic-feed-links' );
 
-	load_theme_textdomain( 'adams-razor', TEMPLATEPATH . '/languages' );
+	load_theme_textdomain( 'adams-razor', get_template_directory() . '/languages' );
 
 	$locale = get_locale();
-	$locale_file = TEMPLATEPATH . "/languages/$locale.php";
+	$locale_file = get_template_directory() . "/languages/$locale.php";
 	if ( is_readable( $locale_file ) )
 		require_once( $locale_file );
 
@@ -269,15 +269,35 @@ function adamsrazor_enqueue_scripts(){
 add_action( 'wp_enqueue_scripts', 'adamsrazor_enqueue_scripts');
 
 
-// Option to add custom tracking and JS code to header and footer
-function adamsrazor_custom_head(){
-	$options = get_option('adamsrazor_theme_options');	
-	echo htmlspecialchars_decode($options['precloseheadtag']);
-}
-add_action( 'wp_head', 'adamsrazor_custom_head' );
 
-function adamsrazor_custom_footer(){
-	$options = get_option('adamsrazor_theme_options');	
-	echo htmlspecialchars_decode($options['preclosebodytag']);			
+/**
+ * Creates a nicely formatted and more specific title element text
+ * for output in head of document, based on current view.
+ *
+ * All Credit Twenty Twelve 1.0
+ *
+ * @param string $title Default title text for current view.
+ * @param string $sep Optional separator.
+ * @return string Filtered title.
+ */
+function adamsrazor_wp_title( $title, $sep ) {
+	global $paged, $page;
+
+	if ( is_feed() )
+		return $title;
+
+	// Add the site name.
+	$title .= get_bloginfo( 'name' );
+
+	// Add the site description for the home/front page.
+	$site_description = get_bloginfo( 'description', 'display' );
+	if ( $site_description && ( is_home() || is_front_page() ) )
+		$title = "$title $sep $site_description";
+
+	// Add a page number if necessary.
+	if ( $paged >= 2 || $page >= 2 )
+		$title = "$title $sep " . sprintf( __( 'Page %s', 'adamsrazor' ), max( $paged, $page ) );
+
+	return $title;
 }
-add_action( 'wp_footer', 'adamsrazor_custom_footer' );
+add_filter( 'wp_title', 'adamsrazor_wp_title', 10, 2 );
