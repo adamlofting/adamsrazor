@@ -6,13 +6,6 @@
 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="stylesheet" type="text/css" media="all" href="<?php echo get_stylesheet_uri(); ?>" />
-<style type="text/css">
-	@media (min-width: 480px) {  
-		#header {
-			background-image: url(<?php header_image(); ?>);
-		}
-	}
-</style>
 <?php wp_head(); ?>
 </head>
 

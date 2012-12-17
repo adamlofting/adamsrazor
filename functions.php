@@ -45,6 +45,16 @@ $args = array(
 );
 add_theme_support( 'custom-header', $args );
 
+// Use the custom header image as a CSS background image
+function adamsrazor_custom_head(){
+?><style type="text/css">
+	@media (min-width: 480px) {  
+		#header { background-image: url(<?php header_image(); ?>); }
+	}
+</style><?php
+};
+add_action( 'wp_head', 'adamsrazor_custom_head' );
+
 
 // Show home link in menu
 function adamsrazor_page_menu_args( $args ) {
